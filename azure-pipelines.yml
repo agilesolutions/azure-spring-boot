@@ -34,3 +34,4 @@ steps:
       containerRegistry: 'Docker Hub'
       repository: 'spring-boot-example'
       command: 'push'
+      tags: '$(ImageName)'
