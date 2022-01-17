@@ -34,4 +34,4 @@ steps:
       containerRegistry: 'Docker Hub'
       repository: 'spring-boot-example'
       command: 'push'
-      tags: 'agilesolutions/spring-boot-example:latest'
+      tags: 'docker.io/agilesolutions/spring-boot-example:latest'
