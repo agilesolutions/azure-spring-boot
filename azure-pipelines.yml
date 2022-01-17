@@ -28,10 +28,13 @@ steps:
       goals: 'spring-boot:build-image'
       publishJUnitResults: false
       jdkVersionOption: '1.11'
-
   - task: Docker@2
     inputs:
       containerRegistry: 'Docker Hub'
-      repository: 'spring-boot-example'
+      command: 'login'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'Docker Hub'
+      repository: '$(ImageName)'
       command: 'push'
       tags: 'latest'
