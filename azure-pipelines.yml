@@ -29,8 +29,8 @@ steps:
       publishJUnitResults: false
       jdkVersionOption: '1.11'
 
-- task: Docker@2
-  inputs:
-    containerRegistry: 'docker hub'
-    repository: 'spring-boot-example'
-    command: 'push'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker hub'
+      repository: 'spring-boot-example'
+      command: 'push'
