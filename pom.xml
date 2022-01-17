@@ -40,7 +40,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				   <configuration>
    					 	<image>
-     						<name>agilesolutions/${project.artifactId}</name>
+     						<name>a${project.artifactId}</name>
    						 </image>
     					<layers>
      						<enabled>true</enabled>
