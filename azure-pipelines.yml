@@ -29,10 +29,3 @@ steps:
       publishJUnitResults: false
       jdkVersionOption: '1.11'
 
-  - task: Docker@2
-    displayName: Push Docker image
-    inputs:
-#      containerRegistry: 'timscontainerregistry'
-      repository: 'spring-boot-example'
-      command: 'push'
-      tags: 'latest'
