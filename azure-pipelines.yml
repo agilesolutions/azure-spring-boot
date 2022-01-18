@@ -20,7 +20,22 @@ steps:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
-
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      testRunTitle: 'my first test'
+      codeCoverageToolOption: 'JaCoCo'
+      codeCoverageSourceDirectories: '$(System.DefaultWorkingDirectory)/src/main/java/'
+      codeCoverageFailIfEmpty: true
+      javaHomeOption: 'JDKVersion'
+      mavenVersionOption: 'Default'
+      mavenAuthenticateFeed: false
+      effectivePomSkip: false
+      sonarQubeRunAnalysis: true
+      isJacocoCoverageReportXML: true
+      sqMavenPluginVersionChoice: 'latest'
   - task: Maven@3
     displayName: Build Docker image
     inputs:
