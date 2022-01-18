@@ -15,6 +15,9 @@
 	<description>Demo project for Spring Boot to build using Azure DevOps</description>
 	<properties>
 		<java.version>11</java.version>
+		<!-- persistence -->
+		<liquibase.version>3.6.1</liquibase.version>
+		<liquibase-hibernate4.version>3.6</liquibase-hibernate4.version>
 	</properties>
 	<dependencies>
 		<dependency>
