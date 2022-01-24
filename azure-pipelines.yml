@@ -38,7 +38,7 @@ steps:
       sonarQubeRunAnalysis: false
       isJacocoCoverageReportXML: true
       sqMavenPluginVersionChoice: 'latest'
-      goals: 'clean clover:setup test clover:aggregate clover:clover'
+      #goals: 'clean clover:setup test clover:aggregate clover:clover'
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'JUnit'
