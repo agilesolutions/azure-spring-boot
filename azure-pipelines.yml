@@ -44,7 +44,7 @@ steps:
     inputs:
       codeCoverageTool: 'JaCoCo'
       summaryFileLocation: '$(System.SourcesDirectory)/CoverageResults/Coberture.xml'
-      failIfCoverageEmpty: true
+      failIfCoverageEmpty: false
   - task: Maven@3
     displayName: Build Docker image
     inputs:
