@@ -39,6 +39,10 @@ steps:
       isJacocoCoverageReportXML: true
       sqMavenPluginVersionChoice: 'latest'
       #goals: 'clean clover:setup test clover:aggregate clover:clover'
+  - task: CmdLine@2
+    inputs:
+      script: 'ls -latr'
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'JUnit'
