@@ -38,13 +38,12 @@ steps:
       sonarQubeRunAnalysis: false
       isJacocoCoverageReportXML: true
       sqMavenPluginVersionChoice: 'latest'
+      goals: 'clean clover:setup test clover:aggregate clover:clover'
+  
   - task: PublishCodeCoverageResults@1
     inputs:
       codeCoverageTool: 'JaCoCo'
-      summaryFileLocation: '$(System.DefaultWorkingDirectory)/src/main/java/'
-      pathToSources: '$(System.DefaultWorkingDirectory)/src/main/java/'
-      reportDirectory: '$(System.DefaultWorkingDirectory)/src/main/java/'
-      additionalCodeCoverageFiles: '$(System.DefaultWorkingDirectory)/src/main/java/'
+      summaryFileLocation: '$(System.SourcesDirectory)/CoverageResults/Coberture.xml'
       failIfCoverageEmpty: true
   - task: Maven@3
     displayName: Build Docker image
