@@ -3,11 +3,18 @@ package com.example.azure.devops.model;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.*;
+
 @Data
 @Builder
+@Entity
+@Table(name="contract")
 public class Contract {
 
-    int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
+    @Column(nullable = false)
     String name;
 }
