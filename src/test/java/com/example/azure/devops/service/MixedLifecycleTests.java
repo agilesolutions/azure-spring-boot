@@ -8,17 +8,17 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Testcontainers
+//@Testcontainers
 class MixedLifecycleTests {
 
     // will be started before and stopped after each test method
-    @Container
+    //@Container
     private PostgreSQLContainer postgresqlContainer = new PostgreSQLContainer()
             .withDatabaseName("foo")
             .withUsername("foo")
             .withPassword("secret");
 
-    @Test
+    //@Test
     void test() {
         assertTrue(postgresqlContainer.isRunning());
     }

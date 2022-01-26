@@ -22,9 +22,9 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(PactConsumerTestExt.class)
-@ExtendWith(SpringExtension.class)
-@PactTestFor(providerName = "contractProvider", port = "8089")
+//@ExtendWith(PactConsumerTestExt.class)
+//@ExtendWith(SpringExtension.class)
+//@PactTestFor(providerName = "contractProvider", port = "8089")
 //@ActiveProfiles("test")
 @ContextConfiguration(classes = {ContractServiceConfiguration.class})
 class ContractServiceTest {
