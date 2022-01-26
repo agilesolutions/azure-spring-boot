@@ -9,6 +9,14 @@ databaseChangeLog:
             tableExists:
               tableName: contract
       changes:
+        - createSequence:
+            sequenceName: contract_seq
+            dataType: int
+        - addAutoIncrement:
+            columnDataType: int
+            columnName: id
+            tableName: contract
+            incrementBy: 1
         - createTable:
             columns:
               - column:
