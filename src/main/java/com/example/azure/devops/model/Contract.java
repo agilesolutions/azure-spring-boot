@@ -1,7 +1,6 @@
 package com.example.azure.devops.model;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -9,6 +8,8 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name="contract")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Contract {
 
     @Id
