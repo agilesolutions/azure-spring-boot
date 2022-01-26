@@ -15,7 +15,7 @@ databaseChangeLog:
         - createTable:
             columns:
               - column:
-                  autoIncrement: true
+                  autoIncrement: false
                   constraints:
                     nullable: false
                     primaryKey: true
