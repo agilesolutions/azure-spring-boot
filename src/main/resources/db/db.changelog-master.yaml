@@ -7,7 +7,7 @@ databaseChangeLog:
         - onFail: MARK_RAN
           not:
             tableExists:
-              tableName: user_details
+              tableName: contract
       changes:
         - createTable:
             columns:
@@ -22,14 +22,6 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
-                  name: username
+                  name: name
                   type: VARCHAR(250)
-              - column:
-                  constraints:
-                    nullable: false
-                  name: first_name
-                  type: VARCHAR(250)
-              - column:
-                  name: last_name
-                  type: VARCHAR(250)
-            tableName: user_details
+            tableName: contract
