@@ -4,11 +4,14 @@ import com.example.azure.devops.model.Contract;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -22,7 +25,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestPropertySource(properties = {
         "spring.jpa.hibernate.ddl-auto=validate"
 })
-@ContextConfiguration(initializers = {ContractRepositoryTest.Initializer.class})
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@ContextConfiguration(initializers = {ContractRepositoryTest.Initializer.class})
 @Testcontainers(disabledWithoutDocker = true)
 class ContractRepositoryTest {
 
@@ -35,6 +39,12 @@ class ContractRepositoryTest {
             .withUsername("sa")
             .withPassword("sa");
 
+    @DynamicPropertySource
+    static void setDatasourceProperties(DynamicPropertyRegistry propertyRegistry) {
+        propertyRegistry.add("spring.datasource.url", postgreSQLContainer::getJdbcUrl);
+        propertyRegistry.add("spring.datasource.password", postgreSQLContainer::getPassword);
+        propertyRegistry.add("spring.datasource.username", postgreSQLContainer::getUsername);
+    }
 
     @Test
     void findByNameNativeQuery() {
