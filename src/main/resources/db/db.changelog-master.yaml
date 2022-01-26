@@ -9,9 +9,9 @@ databaseChangeLog:
             tableExists:
               tableName: contract
       changes:
-        - createSequence:
-            sequenceName: contract_seq
-            dataType: int
+#        - createSequence:
+#            sequenceName: contract_seq
+#            dataType: int
         - addAutoIncrement:
             columnDataType: int
             columnName: id
