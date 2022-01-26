@@ -18,6 +18,8 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,7 +36,8 @@ class ContractRepositoryTest {
     ContractRepository contractRepository;
 
     @Container
-    public static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer("postgres:11.1")
+    public static PostgreSQLContainer postgreSQLContainer = (PostgreSQLContainer) new PostgreSQLContainer("postgres:11.1")
+            .withInitScript("load-contracts.sql")
             .withDatabaseName("integration-tests-db")
             .withUsername("sa")
             .withPassword("sa");
@@ -53,10 +56,13 @@ class ContractRepositoryTest {
 
         Contract contract = contractRepository.findByNameNativeQuery("test");
 
+        List<Contract> contracts = contractRepository.findAll();
+
         assertThat(contractRepository.findByNameNativeQuery("test")).isNotNull();
         assertAll("test contract"
         , () -> assertEquals("test",contract.getName())
-        , () -> assertEquals(1L, contract.getId()));
+        , () -> assertEquals(1L, contract.getId())
+        , () -> assertEquals(4, contracts.size()));
     }
 
     static class Initializer
