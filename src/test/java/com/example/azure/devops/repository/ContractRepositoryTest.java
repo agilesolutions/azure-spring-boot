@@ -50,7 +50,13 @@ class ContractRepositoryTest {
     void findByNameNativeQuery() {
 
         contractRepository.save(Contract.builder().id(1L).name("test").build());
+
+        Contract contract = contractRepository.findByNameNativeQuery("test");
+
         assertThat(contractRepository.findByNameNativeQuery("test")).isNotNull();
+        assertAll("test contract"
+        , () -> assertEquals("test",contract.getName())
+        , () -> assertEquals(1L, contract.getId()));
     }
 
     static class Initializer
