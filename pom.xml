@@ -104,6 +104,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.jupiter-tools</groupId>
+			<artifactId>spring-test-kafka</artifactId>
+			<version>0.2</version>
+		</dependency>
+
 
 
 	</dependencies>
