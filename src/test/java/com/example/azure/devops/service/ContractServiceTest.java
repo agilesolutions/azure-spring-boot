@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //@ExtendWith(SpringExtension.class)
 //@PactTestFor(providerName = "contractProvider", port = "8089")
 //@ActiveProfiles("test")
-@ContextConfiguration(classes = {ContractServiceConfiguration.class})
+//@ContextConfiguration(classes = {ContractServiceConfiguration.class})
 class ContractServiceTest {
 
     @Autowired
