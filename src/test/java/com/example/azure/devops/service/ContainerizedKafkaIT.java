@@ -41,14 +41,14 @@ public class ContainerizedKafkaIT {
 
     @Test
     @DisplayName("kafka server should be running")
-    void shouldBeRunningKafka() throws Exception {
+    public void shouldBeRunningKafka() throws Exception {
         System.out.printf("robserver running");
         assertTrue(kafkaContainer.isRunning());
     }
 
     @Test
     @DisplayName("should send and receive records over kafka")
-    void shouldSendAndReceiveMessages() throws Exception {
+    public void shouldSendAndReceiveMessages() throws Exception {
         var servers = kafkaContainer.getBootstrapServers();
         System.out.printf("robservers: %s%n", servers);
 
