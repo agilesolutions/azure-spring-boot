@@ -44,8 +44,8 @@ public class ContainerizedKafkaIT {
         assertTrue(kafkaContainer.isRunning());
     }
 
-    //@Test
-    //@DisplayName("should send and receive records over kafka")
+    @Test
+    @DisplayName("should send and receive records over kafka")
     void shouldSendAndReceiveMessages() throws Exception {
         var servers = kafkaContainer.getBootstrapServers();
         System.out.printf("robservers: %s%n", servers);
