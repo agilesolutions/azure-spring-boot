@@ -38,7 +38,7 @@ class ContractRepositoryTest {
 
     @Container
     public static PostgreSQLContainer postgreSQLContainer = (PostgreSQLContainer) new PostgreSQLContainer("postgres:11.1")
-            .withInitScript("load-contracts.sql")
+            //.withInitScript("load-contracts.sql")
             .withDatabaseName("integration-tests-db")
             .withUsername("sa")
             .withPassword("sa");
