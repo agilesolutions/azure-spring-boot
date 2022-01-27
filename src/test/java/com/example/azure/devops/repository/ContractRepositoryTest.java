@@ -74,7 +74,7 @@ class ContractRepositoryTest {
         List<Contract> contracts = contractRepository.findAll();
 
         assertAll("test contracts"
-                , () -> assertEquals(1, contracts.size()));
+                , () -> assertEquals(2, contracts.size()));
     }
 
 
