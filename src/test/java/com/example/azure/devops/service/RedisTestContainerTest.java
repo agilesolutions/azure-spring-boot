@@ -14,21 +14,21 @@ import java.util.Date;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@SpringBootTest
-@KafkaTestContainer
+//@SpringBootTest
+//@KafkaTestContainer
 //@EnableKafkaTest(topics = "integer-key-test-topic",
  //       testConsumerConfig = IntegerKeyKafkaConsumerConfig.class)
-@TestPropertySource(properties = {
-        "spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer",
-        "spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.IntegerSerializer"
-})
+//@TestPropertySource(properties = {
+ //       "spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer",
+   //     "spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.IntegerSerializer"
+//})
 class RedisTestContainerTest {
 
-    @Autowired
+   // @Autowired
     private KafkaTemplate<String, Object> kafkaTemplate;
 
-    @Test
-    @ExpectedMessages(topic = "integer-key-test-topic", datasetFile = "/datasets/expected_without_class_ref.json")
+    //@Test
+    //@ExpectedMessages(topic = "integer-key-test-topic", datasetFile = "/datasets/expected_without_class_ref.json")
     void withIntKeys() {
         kafkaTemplate.send("test-topic", Foo.builder().value("qwert").build());
         kafkaTemplate.send("test-topic", Bar.builder().name("baaark").build());
