@@ -7,6 +7,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
@@ -25,7 +26,7 @@ public class RedisTest {
     @Test
     public void verifyRunning() {
 
-        assertTrue(postgreSQLContainer.isRunning());
+        assertFalse(postgreSQLContainer.isRunning());
 
     }
 }
