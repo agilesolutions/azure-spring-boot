@@ -69,11 +69,10 @@ class ContractRepositoryTest {
     @DisplayName("find all contracts")
     void givenContract1Exists_whenFindAllContracts_thenFindOneRecord() {
 
-        contractRepository.save(Contract.builder().id(1L).name("test").build());
+        contractRepository.save(Contract.builder().id(2L).name("test2").build());
 
         List<Contract> contracts = contractRepository.findAll();
 
-        assertThat(contractRepository.findByNameNativeQuery("test")).isNotNull();
         assertAll("test contracts"
                 , () -> assertEquals(1, contracts.size()));
     }
