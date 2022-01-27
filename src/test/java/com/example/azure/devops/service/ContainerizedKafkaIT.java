@@ -14,6 +14,8 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -26,7 +28,14 @@ public class ContainerizedKafkaIT {
     public static final int NUMBER_OF_MESSAGES = 100;
 
     @Container
-    public KafkaContainer kafkaContainer = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1"));
+    public static KafkaContainer kafkaContainer = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:5.4.3"));
+
+    @DynamicPropertySource
+    static void kafkaProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.kafka.bootstrap-servers", () -> {
+            return kafkaContainer.getHost() + ":" + kafkaContainer.getFirstMappedPort();
+        });
+    }
 
     @Test
     @DisplayName("kafka server should be running")
@@ -35,8 +44,8 @@ public class ContainerizedKafkaIT {
         assertTrue(kafkaContainer.isRunning());
     }
 
-    @Test
-    @DisplayName("should send and receive records over kafka")
+    //@Test
+    //@DisplayName("should send and receive records over kafka")
     void shouldSendAndReceiveMessages() throws Exception {
         var servers = kafkaContainer.getBootstrapServers();
         System.out.printf("robservers: %s%n", servers);
