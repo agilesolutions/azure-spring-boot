@@ -30,7 +30,6 @@ import static org.junit.jupiter.api.Assertions.*;
         "spring.jpa.hibernate.ddl-auto=validate"
 })
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-//@ContextConfiguration(initializers = {ContractRepositoryTest.Initializer.class})
 @Testcontainers(disabledWithoutDocker = true)
 class ContractRepositoryTest {
 
@@ -66,9 +65,9 @@ class ContractRepositoryTest {
 
     }
 
-    @Test
-    @DisplayName("find all contracts")
-    @Disabled
+    //@Test
+    //@DisplayName("find all contracts")
+    //@Disabled
     void givenContract1Exists_whenFindAllContracts_thenFindOneRecord() {
 
         contractRepository.save(Contract.builder().id(2L).name("test2").build());
@@ -79,15 +78,4 @@ class ContractRepositoryTest {
                 , () -> assertFalse(contracts.isEmpty()));
     }
 
-
-    static class Initializer
-            implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-            TestPropertyValues.of(
-                    "spring.datasource.url=" + postgreSQLContainer.getJdbcUrl(),
-                    "spring.datasource.username=" + postgreSQLContainer.getUsername(),
-                    "spring.datasource.password=" + postgreSQLContainer.getPassword()
-            ).applyTo(configurableApplicationContext.getEnvironment());
-        }
-    }
 }

@@ -21,8 +21,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-//@RestClientTest({ContractService.class})
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@RestClientTest({ContractService.class})
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ContractServiceTest2 {
 
     @Autowired
@@ -34,12 +34,12 @@ class ContractServiceTest2 {
     @Autowired
     ObjectMapper objectMapper;
 
-    //@AfterEach
+    @AfterEach
     public void resetMockServer() {
         mockServer.reset();
     }
 
-    //@Test
+    @Test
     void givenContractOpen_whenSelectingFirstContract_thenReturnFirstContract() throws JsonProcessingException {
 
         mockServer.expect(requestTo("/1/details"))

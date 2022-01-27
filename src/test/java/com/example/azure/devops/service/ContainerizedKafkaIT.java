@@ -1,5 +1,6 @@
 package com.example.azure.devops.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.Properties;
@@ -13,20 +14,21 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.SpringApplicationExtensionsKt;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
 @ExtendWith(KafkaExtension.class)
 @DirtiesContext
 public class ContainerizedKafkaIT {
@@ -88,6 +90,6 @@ public class ContainerizedKafkaIT {
         }
 
         waitABit.await();
-        Assert.assertEquals(NUMBER_OF_MESSAGES, counter.get());
+        assertEquals(NUMBER_OF_MESSAGES, counter.get());
     }
 }
