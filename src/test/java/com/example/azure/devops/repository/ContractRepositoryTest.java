@@ -1,6 +1,7 @@
 package com.example.azure.devops.repository;
 
 import com.example.azure.devops.model.Contract;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ class ContractRepositoryTest {
     }
 
     @Test
+    @DisplayName("contractje")
     void findByNameNativeQuery() {
 
         contractRepository.save(Contract.builder().id(1L).name("test").build());

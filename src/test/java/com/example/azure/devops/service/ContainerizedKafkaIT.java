@@ -19,22 +19,22 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-@Testcontainers
+//@Testcontainers
 public class ContainerizedKafkaIT {
 
     public static final String MY_TOPIC = "my-topic";
     public static final int NUMBER_OF_MESSAGES = 100;
 
-    @Container
+    //@Container
     public KafkaContainer kafkaContainer = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1"));
 
-    @Test
+    //@Test
     @DisplayName("kafka server should be running")
     void shouldBeRunningKafka() throws Exception {
         assertTrue(kafkaContainer.isRunning());
     }
 
-    @Test
+    //@Test
     @DisplayName("should send and receive records over kafka")
     void shouldSendAndReceiveMessages() throws Exception {
         var servers = kafkaContainer.getBootstrapServers();
