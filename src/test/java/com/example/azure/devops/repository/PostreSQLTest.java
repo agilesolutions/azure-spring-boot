@@ -2,7 +2,6 @@ package com.example.azure.devops.repository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -13,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @Testcontainers(disabledWithoutDocker = true)
-public class RedisTest {
+public class PostreSQLTest {
 
     @Container
     public static PostgreSQLContainer postgreSQLContainer = (PostgreSQLContainer) new PostgreSQLContainer("postgres:11.1")
@@ -27,7 +26,7 @@ public class RedisTest {
     @Test
     public void verifyRunning() {
 
-        assertFalse(postgreSQLContainer.isRunning());
+        assertTrue(postgreSQLContainer.isRunning());
 
     }
 }
