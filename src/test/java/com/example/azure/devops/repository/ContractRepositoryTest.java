@@ -51,21 +51,33 @@ class ContractRepositoryTest {
     }
 
     @Test
-    @DisplayName("contractje")
-    void findByNameNativeQuery() {
+    @DisplayName("find contract by name")
+    void givenContract1Exists_whenFindContractOnName_thenFindRecord() {
 
         contractRepository.save(Contract.builder().id(1L).name("test").build());
 
         Contract contract = contractRepository.findByNameNativeQuery("test");
 
-        List<Contract> contracts = contractRepository.findAll();
-
         assertThat(contractRepository.findByNameNativeQuery("test")).isNotNull();
         assertAll("test contract"
         , () -> assertEquals("test",contract.getName())
-        , () -> assertEquals(1L, contract.getId())
-        , () -> assertEquals(4, contracts.size()));
+        , () -> assertEquals(1L, contract.getId()));
+
     }
+
+    @Test
+    @DisplayName("find all contracts")
+    void givenContract1Exists_whenFindAllContracts_thenFindOneRecord() {
+
+        contractRepository.save(Contract.builder().id(1L).name("test").build());
+
+        List<Contract> contracts = contractRepository.findAll();
+
+        assertThat(contractRepository.findByNameNativeQuery("test")).isNotNull();
+        assertAll("test contracts"
+                , () -> assertEquals(1, contracts.size()));
+    }
+
 
     static class Initializer
             implements ApplicationContextInitializer<ConfigurableApplicationContext> {
