@@ -3,6 +3,7 @@ package com.example.azure.devops.service;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.concurrent.TimeUnit;
 
@@ -47,7 +48,7 @@ class EmbeddedKafkaIntegrationTest {
         consumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
         assertThat(consumer.getLatch().getCount(), equalTo(0L));
 
-        assertThat(consumer.getPayload(), containsString("embedded-test-topic"));
+        assertEquals("test",consumer.getPayload().getName());
     }
 
     //@Test
@@ -56,7 +57,7 @@ class EmbeddedKafkaIntegrationTest {
         consumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
         assertThat(consumer.getLatch().getCount(), equalTo(0L));
-        assertThat(consumer.getPayload(), containsString("embedded-test-topic"));
+        assertEquals("test",consumer.getPayload().getName());
     }
 
 }
