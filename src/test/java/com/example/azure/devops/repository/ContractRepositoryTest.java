@@ -58,9 +58,8 @@ class ContractRepositoryTest {
 
     }
 
-    //@Test
-    //@DisplayName("find all contracts")
-    //@Disabled
+    @Test
+    @DisplayName("find all contracts")
     void givenContract1Exists_whenFindAllContracts_thenFindOneRecord() {
 
         contractRepository.save(Contract.builder().id(2L).name("test2").build());
