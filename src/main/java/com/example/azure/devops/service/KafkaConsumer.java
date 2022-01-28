@@ -16,7 +16,7 @@ import java.util.concurrent.CountDownLatch;
 @Component
 public class KafkaConsumer {
 
-    private CountDownLatch latch = new CountDownLatch(1);
+    private CountDownLatch latch = new CountDownLatch(10);
     private String payload = null;
 
     //@KafkaListener(topics = "${test.topic}")
