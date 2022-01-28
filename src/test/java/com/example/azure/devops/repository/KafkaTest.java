@@ -118,7 +118,7 @@ public class KafkaTest {
         @Bean
         public ProducerFactory<String, Contract> producerFactory() {
             Map<String, Object> configProps = new HashMap<>();
-            configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "PLAINTEXT://localhost:9093");
+            configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "PLAINTEXT://localhost:9092");
             configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "baeldung");
             configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
             configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
