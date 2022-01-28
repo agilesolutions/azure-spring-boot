@@ -51,7 +51,7 @@ public class KafkaTest {
         producer.send(topic, "Sending with own controller");
         consumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
-        assertEquals(1L,consumer.getLatch().getCount());
+        assertEquals(10L,consumer.getLatch().getCount());
         assertTrue(consumer.getPayload().contains("embedded-test-topic"));
     }
 
