@@ -4,11 +4,15 @@ package com.example.azure.devops.repository;
 import com.example.azure.devops.model.Contract;
 import com.example.azure.devops.service.KafkaConsumer;
 import com.example.azure.devops.service.KafkaProducer;
+import liquibase.pro.packaged.B;
+import org.apache.kafka.clients.admin.AdminClient;
+import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +33,7 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class KafkaTest {
 
     @Container
-    public static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1"));
+    public static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:5.4.3"));
 
 
     @Autowired
@@ -49,6 +54,28 @@ public class KafkaTest {
 
     @Value("${test.topic:test}")
     private String topic;
+
+    private AdminClient adminClient;
+
+
+    @BeforeEach
+    void setup() {
+        if (adminClient == null) {
+            kafka.start();
+            // here value is dynamic and is not accessible in Environment; not as `@AutoConfigureWiremock`, I have `wiremock.server` value set after)
+            String bootStrapServer = kafka.getBootstrapServers();
+            System.out.println(String.format("Kafka container created at: %s", bootStrapServer));
+            adminClient = AdminClient.create(Map.of(
+                    AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer
+            ));
+            // create my topic
+            System.out.println(String.format("Current topic: %s", topic));
+            adminClient.createTopics(Set.of(
+                    new NewTopic(topic, 4, (short) 1)
+            ));
+        }
+    }
+
 
     @Test
     public void verifyServers() {
