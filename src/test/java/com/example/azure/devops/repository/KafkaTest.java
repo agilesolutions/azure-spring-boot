@@ -47,7 +47,7 @@ public class KafkaTest {
     @Autowired
     private KafkaProducer producer;
 
-    @Value("${test.topic:embedded-test-topic}")
+    @Value("${test.topic:test}")
     private String topic;
 
     @Test
@@ -99,7 +99,7 @@ public class KafkaTest {
 
         @Bean
         public NewTopic newTopic() {
-            return new NewTopic("embedded-test-topic",1,(short)1);
+            return new NewTopic("test",1,(short)1);
         }
 
         @Bean
