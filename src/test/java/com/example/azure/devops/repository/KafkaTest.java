@@ -78,7 +78,7 @@ public class KafkaTest {
         consumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
         assertEquals(10L,consumer.getLatch().getCount());
-        //assertEquals("test",consumer.getPayload().getName());
+        assertEquals("test",consumer.getPayload().getName());
     }
 
 
