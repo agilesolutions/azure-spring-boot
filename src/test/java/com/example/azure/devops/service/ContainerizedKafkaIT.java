@@ -25,12 +25,12 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
-
-@ExtendWith(SpringExtension.class)
+import org.testcontainers.junit.jupiter.Testcontainers;@ExtendWith(SpringExtension.class)
 @ExtendWith(KafkaExtension.class)
 @DirtiesContext
+import org.testcontainers.utility.DockerImageName;
+
+
 public class ContainerizedKafkaIT {
 
     public static final String MY_TOPIC = "my-topic";
