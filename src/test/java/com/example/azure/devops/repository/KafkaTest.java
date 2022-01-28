@@ -107,7 +107,7 @@ public class KafkaTest {
         @Bean
         public Map<String, Object> consumerConfigs() {
             Map<String, Object> props = new HashMap<>();
-            props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "BROKER://localhost:9092");
+            props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "BROKER://localhost:9093");
             props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
             props.put(ConsumerConfig.GROUP_ID_CONFIG, "baeldung");
             props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -118,7 +118,7 @@ public class KafkaTest {
         @Bean
         public ProducerFactory<String, Contract> producerFactory() {
             Map<String, Object> configProps = new HashMap<>();
-            configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "BROKER://localhost:9092");
+            configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "BROKER://localhost:9093");
             configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "baeldung");
             configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
             configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
