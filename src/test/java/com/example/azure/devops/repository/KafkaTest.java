@@ -37,7 +37,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class KafkaTest {
 
     @Container
-    public static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1"));
+    public static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1"))
+            .withEnv("CONNECT_BOOTSTRAP_SERVERS", "kafka:9092")
+            .withNetworkAliases("kafka");
 
 
     @Autowired
@@ -111,6 +113,7 @@ public class KafkaTest {
         public ProducerFactory<String, Contract> producerFactory() {
             Map<String, Object> configProps = new HashMap<>();
             configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers());
+            configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "baeldung");
             configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
             configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
             return new DefaultKafkaProducerFactory<>(configProps);
