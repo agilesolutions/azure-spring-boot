@@ -1,6 +1,7 @@
 package com.example.azure.devops.repository;
 
 
+import com.example.azure.devops.model.Contract;
 import com.example.azure.devops.service.KafkaConsumer;
 import com.example.azure.devops.service.KafkaProducer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -15,6 +16,8 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
+import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -48,7 +51,7 @@ public class KafkaTest {
     @Test
     public void givenKafkaDockerContainer_whenSendingtoSimpleProducer_thenMessageReceived()
             throws Exception {
-        producer.send(topic, "Sending with own controller");
+        producer.send(topic, Contract.builder().id(1).name("test").build());
         consumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
         assertEquals(10L,consumer.getLatch().getCount());
@@ -91,22 +94,22 @@ public class KafkaTest {
             props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
             props.put(ConsumerConfig.GROUP_ID_CONFIG, "baeldung");
             props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-            props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+            props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
             return props;
         }
 
         @Bean
-        public ProducerFactory<String, String> producerFactory() {
+        public ProducerFactory<String, Contract> producerFactory() {
             Map<String, Object> configProps = new HashMap<>();
             configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers());
             configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-            configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+            configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
             return new DefaultKafkaProducerFactory<>(configProps);
         }
 
         @Bean
-        public KafkaTemplate<String, String> kafkaTemplate() {
-            return new KafkaTemplate<>(producerFactory());
+        public KafkaTemplate<String, Contract> kafkaTemplate() {
+            return new KafkaTemplate<String, Contract>(producerFactory());
         }
 
         @Bean

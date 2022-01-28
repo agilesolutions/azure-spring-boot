@@ -1,5 +1,6 @@
 package com.example.azure.devops.service;
 
+import com.example.azure.devops.model.Contract;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,13 +18,13 @@ import java.util.concurrent.CountDownLatch;
 public class KafkaConsumer {
 
     private CountDownLatch latch = new CountDownLatch(10);
-    private String payload = null;
+    private Contract payload = null;
 
     //@KafkaListener(topics = "${test.topic}")
     @KafkaListener(topics = "embedded-test-topic")
-    public void receive(ConsumerRecord<?, ?> consumerRecord) {
-        log.info("received payload='{}'", consumerRecord.toString());
-        setPayload(consumerRecord.toString());
+    public void receive(Contract contract) {
+        log.info("received payload for contract name ='{}'", contract.getName());
+        setPayload(contract);
         latch.countDown();
     }
 

@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.concurrent.TimeUnit;
 
+import com.example.azure.devops.model.Contract;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -51,7 +52,7 @@ class EmbeddedKafkaIntegrationTest {
 
     //@Test
     public void givenEmbeddedKafkaBroker_whenSendingtoSimpleProducer_thenMessageReceived() throws Exception {
-        producer.send(topic, "Sending with our own simple KafkaProducer");
+        producer.send(topic, Contract.builder().id(1).name("test").build());
         consumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
         assertThat(consumer.getLatch().getCount(), equalTo(0L));
