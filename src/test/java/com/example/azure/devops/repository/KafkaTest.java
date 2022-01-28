@@ -15,10 +15,8 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.KafkaContainer;
-import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
@@ -31,7 +29,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @Testcontainers(disabledWithoutDocker = true)
-//@ContextConfiguration(classes = {KafkaTestConfiguration.class})
 public class KafkaTest {
 
     @Container
@@ -55,7 +52,7 @@ public class KafkaTest {
         consumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
         assertEquals(1L,consumer.getLatch().getCount());
-        //assertTrue(consumer.getPayload().contains("embedded-test-topic"));
+        assertTrue(consumer.getPayload().contains("embedded-test-topic"));
     }
 
     @Test
