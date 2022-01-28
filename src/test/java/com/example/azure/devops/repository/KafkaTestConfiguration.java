@@ -1,6 +1,7 @@
 package com.example.azure.devops.repository;
 
 
+import com.example.azure.devops.model.Contract;
 import com.example.azure.devops.service.KafkaConsumer;
 import com.example.azure.devops.service.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -42,12 +43,12 @@ public class KafkaTestConfiguration {
     }
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplate() {
+    public KafkaTemplate<String, Contract> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
     @Bean
-    public ProducerFactory<String, String> producerFactory() {
+    public ProducerFactory<String, Contract> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
