@@ -55,7 +55,7 @@ public class KafkaTest {
         consumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
 
         assertEquals(10L,consumer.getLatch().getCount());
-        assertTrue(consumer.getPayload().contains("embedded-test-topic"));
+        assertEquals("test",consumer.getPayload().getName());
     }
 
     @Test
