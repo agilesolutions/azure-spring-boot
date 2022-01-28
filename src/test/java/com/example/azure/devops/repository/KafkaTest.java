@@ -4,6 +4,7 @@ package com.example.azure.devops.repository;
 import com.example.azure.devops.model.Contract;
 import com.example.azure.devops.service.KafkaConsumer;
 import com.example.azure.devops.service.KafkaProducer;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
@@ -85,6 +87,13 @@ public class KafkaTest {
         @Bean
         public ConsumerFactory<Integer, String> consumerFactory() {
             return new DefaultKafkaConsumerFactory<>(consumerConfigs());
+        }
+
+        @Bean
+        public NewTopic newTopic() {
+            return TopicBuilder.name("embedded-test-topic")
+                    .compact()
+                    .build();
         }
 
         @Bean
