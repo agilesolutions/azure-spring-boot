@@ -15,10 +15,10 @@ public class KafkaProducer {
     private final KafkaTemplate<String, Contract> kafkaTemplate;
 
     public void send(String topic, Contract payload) {
-        System.out.println("START sending payload= " + payload + " to topic " + topic);
+        System.out.println(String.format("START sending payload %s to topc %s", payload, topic));
         log.info("sending payload='{}' to topic='{}'", payload, topic);
         kafkaTemplate.send(topic, payload);
 
-        System.out.println("DONE sending payload= " + payload + " to topic " + topic);
+        System.out.println(String.format("FINISHED sending payload %s to topc %s", payload, topic));
     }
 }
