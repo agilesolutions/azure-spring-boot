@@ -44,7 +44,7 @@ public class KafkaTest {
     @Autowired
     private KafkaProducer producer;
 
-    @Value("${test.topic}")
+    @Value("${test.topic:embedded-test-topic}")
     private String topic;
 
 
