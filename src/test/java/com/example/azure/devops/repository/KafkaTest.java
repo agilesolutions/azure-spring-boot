@@ -66,6 +66,8 @@ public class KafkaTest {
     public void verifyServers() {
 
         System.out.println("SERVERHOST " + kafka.getBootstrapServers());
+        System.out.println("EXPOSEDPORTS " + kafka.getExposedPorts());
+        System.out.println("ENV " + kafka.getEnv());
 
         assertNotEquals("",kafka.getBootstrapServers());
 
