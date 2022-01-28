@@ -112,6 +112,19 @@ public class KafkaTest {
             return new KafkaTemplate<>(producerFactory());
         }
 
+        @Bean
+        public KafkaConsumer kafkaConsumer() {
+
+            return new KafkaConsumer();
+        }
+
+        @Bean
+        public KafkaProducer kafkaProducer() {
+
+            return new KafkaProducer(kafkaTemplate());
+        }
+
+
     }
 
 }
