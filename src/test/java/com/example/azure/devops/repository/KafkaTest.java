@@ -99,9 +99,7 @@ public class KafkaTest {
 
         @Bean
         public NewTopic newTopic() {
-            return TopicBuilder.name("embedded-test-topic")
-                    .compact()
-                    .build();
+            return new NewTopic("embedded-test-topic",1,(short)1);
         }
 
         @Bean
