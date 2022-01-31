@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class KafkaTest {
 
     @Container
-    public static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:5.4.3"));
+    public static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1"));
 
 
     @Autowired
