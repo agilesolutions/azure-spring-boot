@@ -65,7 +65,7 @@ public class KafkaTest {
     private AdminClient adminClient;
 
 
-    @BeforeAll
+    @BeforeEach
     void setup() {
         if (adminClient == null) {
             kafka.start();
