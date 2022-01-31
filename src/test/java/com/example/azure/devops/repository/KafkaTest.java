@@ -25,11 +25,13 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.Network;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.shaded.com.google.common.collect.ImmutableMap;
 import org.testcontainers.utility.DockerImageName;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -46,7 +48,8 @@ public class KafkaTest {
 
     @Container
     public static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1"))
-            .withNetwork(network);
+            .withNetwork(network)
+            .waitingFor(Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(360)));
 
 
     @Autowired
