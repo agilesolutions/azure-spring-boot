@@ -49,7 +49,7 @@ public class KafkaTest {
     @Container
     public static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1"))
             .withNetwork(network)
-            .waitingFor(Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(360)));
+            .waitingFor(Wait.forListeningPort());
 
 
     @Autowired
@@ -74,6 +74,8 @@ public class KafkaTest {
             adminClient = AdminClient.create(Map.of(
                     AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer
             ));
+            System.out.println(String.format("Kafka docker network : %s", kafka.getNetwork()));
+
             // create my topic
             System.out.println(String.format("Current topic: %s", topic));
             adminClient.createTopics(Set.of(
