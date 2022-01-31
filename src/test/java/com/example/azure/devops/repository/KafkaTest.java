@@ -41,6 +41,9 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * read https://www.baeldung.com/spring-kafka
+ */
 @ExtendWith(SpringExtension.class)
 @Testcontainers(disabledWithoutDocker = true)
 public class KafkaTest {
@@ -61,29 +64,6 @@ public class KafkaTest {
 
     @Value("${test.topic:test}")
     private String topic;
-
-    private AdminClient adminClient;
-
-
-    @BeforeEach
-    void setup() {
-        if (adminClient == null) {
-            kafka.start();
-            // here value is dynamic and is not accessible in Environment; not as `@AutoConfigureWiremock`, I have `wiremock.server` value set after)
-            String bootStrapServer = kafka.getBootstrapServers();
-            System.out.println(String.format("Kafka container created at: %s", bootStrapServer));
-            adminClient = AdminClient.create(Map.of(
-                    AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer
-            ));
-            System.out.println(String.format("Kafka docker network : %s", kafka.getNetwork()));
-
-            // create my topic
-            System.out.println(String.format("Current topic: %s", topic));
-            adminClient.createTopics(Set.of(
-                    new NewTopic(topic, 4, (short) 1)
-            ));
-        }
-    }
 
     @Test
     public void verifyServers() {
@@ -131,6 +111,14 @@ public class KafkaTest {
         public ConsumerFactory<Integer, String> consumerFactory() {
             return new DefaultKafkaConsumerFactory<>(consumerConfigs());
         }
+
+        @Bean
+        public KafkaAdmin kafkaAdmin() {
+            Map<String, Object> configs = new HashMap<>();
+            configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers());
+            return new KafkaAdmin(configs);
+        }
+
 
         @Bean
         public NewTopic newTopic() {
