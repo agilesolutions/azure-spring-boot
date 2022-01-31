@@ -48,11 +48,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @Testcontainers(disabledWithoutDocker = true)
 public class KafkaTest {
 
-    private static Network network = Network.newNetwork();
+    //private static Network network = Network.newNetwork();
 
     @Container
     public static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1"))
-            .withNetwork(network)
+            //.withNetwork(network)
             .waitingFor(Wait.forListeningPort());
 
 
