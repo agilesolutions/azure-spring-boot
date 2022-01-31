@@ -130,7 +130,7 @@ public class KafkaTest {
             Map<String, Object> props = ImmutableMap.of(
                     ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers(),
                     ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest",
-                    ConsumerConfig.GROUP_ID_CONFIG, "tc-" + UUID.randomUUID(),
+                    ConsumerConfig.GROUP_ID_CONFIG, "foo",
                     ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class,
                     ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
             return props;

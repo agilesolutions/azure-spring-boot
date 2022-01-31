@@ -21,7 +21,7 @@ public class KafkaConsumer {
     private Contract payload = null;
 
     //@KafkaListener(topics = "${test.topic}")
-    @KafkaListener(topics = "test")
+    @KafkaListener(topics = "test", groupId = "foo")
     public void receive(Contract contract) {
         System.out.println("FINALLY received payload for contract name " + contract.getName());
         log.info("received payload for contract name ='{}'", contract.getName());
