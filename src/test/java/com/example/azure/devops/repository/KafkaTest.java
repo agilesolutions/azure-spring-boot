@@ -128,7 +128,7 @@ public class KafkaTest {
         @Bean
         public Map<String, Object> consumerConfigs() {
             Map<String, Object> props = ImmutableMap.of(
-                    ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092",
+                    ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers(),
                     ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest",
                     ConsumerConfig.GROUP_ID_CONFIG, "tc-" + UUID.randomUUID(),
                     ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class,
