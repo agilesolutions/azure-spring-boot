@@ -1,8 +1,10 @@
 package com.example.azure.devops.kafka;
 
+import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
+import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.ForeachAction;
 import org.apache.kafka.streams.kstream.KStream;
 
@@ -15,6 +17,7 @@ public class KafkaStreamBuilder {
     private Map<String, Object> propertyConfig;
     private String topic;
     private Properties properties;
+    private SerdeConfiguration serdeConfiguration;
 
     private KafkaStreamBuilder() {
         this.properties = new Properties();
@@ -25,9 +28,10 @@ public class KafkaStreamBuilder {
         return new KafkaStreamBuilder();
     }
 
-    public KafkaStreamBuilder withProperties(final KafkaConfiguration config) {
-
-        propertyConfig.put("whatever",config.getExample());
+    public KafkaStreamBuilder withProperties(KafkaProperties config) {
+        propertyConfig.put("bootstrap.servers", config.getServers());
+        propertyConfig.put("defaul.key.serde", SpecificAvroSerde.class);
+        propertyConfig.put("defaul.value.serde", SpecificAvroSerde.class);
         return this;
     }
 
@@ -44,11 +48,13 @@ public class KafkaStreamBuilder {
                                                                                            ForeachAction<K, V> action) {
         StreamsBuilder streamsBuilder = new StreamsBuilder();
 
-        KStream<K, V> stream = streamsBuilder.stream(topic,null);
+        KStream<K, V> stream = streamsBuilder.stream(topic,
+                Consumed.with(serdeConfiguration.getKSerde(), serdeConfiguration.getVSerde()));
 
         stream.foreach(action);
 
         KafkaStreams kafkaStreams = new KafkaStreams(streamsBuilder.build(), properties);
+        kafkaStreams.start();
 
         return kafkaStreams;
 
