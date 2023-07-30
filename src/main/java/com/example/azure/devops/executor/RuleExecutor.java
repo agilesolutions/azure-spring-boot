@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class RuleExecutor <T extends BaseRule> {
+public class RuleExecutor <T extends BaseRule> {
 
     private List<T> rules = new ArrayList<T>();
 

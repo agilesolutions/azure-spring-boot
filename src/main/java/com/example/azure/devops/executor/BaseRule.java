@@ -1,8 +1,8 @@
 package com.example.azure.devops.executor;
 
-public interface BaseRule extends BaseRuleContext {
+public abstract class BaseRule extends BaseRuleContext {
 
-    default boolean isStopped() {
+    boolean isStopped() {
         return stop;
     }
 
