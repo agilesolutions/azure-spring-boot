@@ -18,7 +18,7 @@ public class RuleExecutor <T extends BaseRule> {
 
         for(T rule:rules) {
                  rule.execute(context);
-                 if (rule.isStopped()) break;
+                 if (context.isStop()) break;
         }
 
 
