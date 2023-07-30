@@ -10,7 +10,7 @@ public class Rulesconfiguration {
     @Bean
     public RuleExecutor<BaseRule> myexecutor() {
 
-        return new RuleExecutor<>( new MyRule(), new YourRule());
+        return new RuleExecutor<>( new MyRule(), new CancelledRule(), new YourRule());
 
     }
 }
