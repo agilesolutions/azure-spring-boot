@@ -14,7 +14,7 @@ public class RuleExecutor <T extends BaseRule> {
         Collections.addAll(rules, args);
     }
 
-    public void execute(T context) {
+    public <C extends BaseRuleContext> void execute(C context) {
 
         for(T rule:rules) {
                  rule.execute(context);
