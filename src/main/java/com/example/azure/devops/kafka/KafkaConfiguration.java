@@ -1,6 +1,6 @@
 package com.example.azure.devops.kafka;
 
-import com.example.azure.devops.dao.EmployeeDao;
+import com.example.azure.devops.executor.dao.EmployeeDao;
 import com.example.azure.devops.model.Employee;
 import com.example.azure.devops.model.EmployeeKey;
 import lombok.RequiredArgsConstructor;
