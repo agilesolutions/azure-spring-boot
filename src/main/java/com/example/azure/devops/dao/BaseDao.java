@@ -1,6 +1,7 @@
 package com.example.azure.devops.dao;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -13,51 +14,35 @@ public abstract class BaseDao <T extends BaseEntity>{
 
     NamedParameterJdbcTemplate template;
 
-    private String query;
-
     private MapSqlParameterSource params;
 
-    public void execute(T entity) {
+    protected List<T> execute() {
 
-         params = setBaseParams();
-
-        // Hollywood principle
-        setCustomParams(params);
+         params = getBaseParams();
 
         // Hollywood principle
-        query = getQuery();
+        getCustomParams(getBaseParams());
 
-        executeQuery(query);
+        // Hollywood principle
+        return executeQuery(getQuery());
 
     }
 
-    public abstract void setCustomParams(MapSqlParameterSource params);
+    public abstract void getCustomParams(MapSqlParameterSource params);
 
     public abstract String getQuery();
 
-    private MapSqlParameterSource setBaseParams() {
+    public abstract RowMapper getRowMapper();
+
+
+    private MapSqlParameterSource getBaseParams() {
 
         return new MapSqlParameterSource("name", "Nam Ha Minh");
     }
 
     private List<T> executeQuery(String query) {
 
-
-        return template.query(query, params, (rs,s) -> {
-
-           List<T> results = new ArrayList<>();
-
-           T record = new T();
-
-
-
-           results.add()
-
-           return results;
-
-        });
-
-
+        return template.query(query, params, getRowMapper());
 
     }
 
