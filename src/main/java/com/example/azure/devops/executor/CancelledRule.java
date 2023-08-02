@@ -1,11 +1,13 @@
 package com.example.azure.devops.executor;
 
-public class CancelledRule extends BaseRule{
+import org.springframework.stereotype.Component;
+
+@Component
+public class CancelledRule implements BaseRule{
+
 
     @Override
-    public <T extends BaseRuleContext> void execute(T context) {
-
-        context.setStop(true);
-
+    public void execute(BaseRuleContext context) {
+        context.setStopped(true);
     }
 }

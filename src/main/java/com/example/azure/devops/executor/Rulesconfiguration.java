@@ -8,9 +8,9 @@ public class Rulesconfiguration {
 
 
     @Bean
-    public RuleExecutor<BaseRule> myexecutor() {
+    public RuleExecutor myexecutor(MyRule myRule, CancelledRule cancelledRule, YourRule yourRule) {
 
-        return new RuleExecutor<>( new MyRule(), new CancelledRule(), new YourRule());
+        return new RuleExecutor(myRule, cancelledRule, yourRule);
 
     }
 }

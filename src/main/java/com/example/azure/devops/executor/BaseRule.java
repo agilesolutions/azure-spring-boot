@@ -1,6 +1,10 @@
 package com.example.azure.devops.executor;
 
-public abstract class BaseRule {
+public interface BaseRule<T extends BaseRuleContext> {
 
-    public abstract  <T extends BaseRuleContext>  void execute(T  context);
+    default boolean isStopped(T context) {
+        return context.isStopped();
+    };
+
+    void execute(T  context);
 }

@@ -1,24 +1,22 @@
 package com.example.azure.devops.executor;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-public class RuleExecutor <T extends BaseRule> {
+public class RuleExecutor <T extends BaseRuleContext> {
 
-    private List<T> rules = new ArrayList<T>();
+    private List<BaseRule<T>> rules;
 
-    public RuleExecutor(T ... args) {
+    public RuleExecutor(BaseRule<T> ... rules) {
 
-        Collections.addAll(rules, args);
+        this.rules = Arrays.asList(rules);
     }
 
-    public <C extends BaseRuleContext> void execute(C context) {
+    public <C extends BaseRuleContext> void execute(T context) {
 
-        for(T rule:rules) {
+        for(BaseRule<T> rule:rules) {
                  rule.execute(context);
-                 if (context.isStop()) break;
+                 if (rule.isStopped(context) || context.isStopped()) break;
         }
 
 
