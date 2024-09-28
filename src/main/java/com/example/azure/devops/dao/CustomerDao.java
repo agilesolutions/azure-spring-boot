@@ -12,25 +12,25 @@ public class CustomerDao extends BaseDao<Customer> {
     private String name;
 
     @Override
-    public void getCustomParams(MapSqlParameterSource params) {
+    protected void getCustomParams(MapSqlParameterSource params) {
         params.addValue("id", name);
 
     }
 
     @Override
-    public String getQuery() {
+    protected String getQuery() {
         return SELECT_CUSTOMER;
     }
 
     @Override
-    public RowMapper<Customer> getRowMapper() {
+    protected RowMapper<Customer> getRowMapper() {
         return (rs, i) -> {
 
             Customer customer = new Customer();
             customer.setId(rs.getInt("id"));
             customer.setName(rs.getString("name"));
 
-
+            return customer;
 
         };
     }

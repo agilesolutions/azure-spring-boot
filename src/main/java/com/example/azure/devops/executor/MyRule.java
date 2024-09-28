@@ -3,7 +3,7 @@ package com.example.azure.devops.executor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MyRule implements BaseRule{
+public class MyRule implements BaseRule {
 
 
     @Override

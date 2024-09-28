@@ -30,8 +30,8 @@ public class KafkaStreamBuilder {
 
     public KafkaStreamBuilder withProperties(KafkaProperties config) {
         propertyConfig.put("bootstrap.servers", config.getServers());
-        propertyConfig.put("defaul.key.serde", SpecificAvroSerde.class);
-        propertyConfig.put("defaul.value.serde", SpecificAvroSerde.class);
+        propertyConfig.put("default.key.serde", SpecificAvroSerde.class);
+        propertyConfig.put("default.value.serde", SpecificAvroSerde.class);
         return this;
     }
 
