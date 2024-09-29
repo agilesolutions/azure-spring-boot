@@ -13,6 +13,7 @@ public class RuleExecutor <T extends BaseRuleContext> {
     }
 
     public void execute(T context) {
+        
 
         for(BaseRule<T> rule:rules) {
                  rule.execute(context);

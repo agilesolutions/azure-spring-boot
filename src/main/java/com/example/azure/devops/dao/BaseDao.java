@@ -28,11 +28,11 @@ public abstract class BaseDao <T extends BaseEntity>{
 
     }
 
-    public abstract void getCustomParams(MapSqlParameterSource params);
+    protected abstract void getCustomParams(MapSqlParameterSource params);
 
-    public abstract String getQuery();
+    protected abstract String getQuery();
 
-    public abstract RowMapper getRowMapper();
+    protected abstract RowMapper getRowMapper();
 
 
     private MapSqlParameterSource getBaseParams() {
