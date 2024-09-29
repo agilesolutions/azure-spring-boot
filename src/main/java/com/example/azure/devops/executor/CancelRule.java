@@ -3,7 +3,7 @@ package com.example.azure.devops.executor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CancelledRule implements BaseRule{
+public class CancelRule implements BaseRule{
 
 
     @Override
