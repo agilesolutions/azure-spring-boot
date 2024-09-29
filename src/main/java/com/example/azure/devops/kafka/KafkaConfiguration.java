@@ -28,7 +28,6 @@ public class KafkaConfiguration {
                 .withProperties(kafkaProperties)
                 .build(EmployeeKey.class, Employee.class
                 , (k, v) -> employeeDao.insertEntity(v) );
-        );
     }
 
 

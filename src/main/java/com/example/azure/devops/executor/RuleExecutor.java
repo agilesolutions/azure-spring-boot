@@ -12,7 +12,7 @@ public class RuleExecutor <T extends BaseRuleContext> {
         this.rules = Arrays.asList(rules);
     }
 
-    public <C extends BaseRuleContext> void execute(T context) {
+    public void execute(T context) {
 
         for(BaseRule<T> rule:rules) {
                  rule.execute(context);

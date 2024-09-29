@@ -14,7 +14,7 @@ public class RunBuilder {
 
     private void build() {
 
-        List list = Arrays.asList(1, 2, 3, 4, 5)
+        List list = Arrays.asList(1, 2, 3, 4, 5);
 
         System.out.println(
                 Builder.build(Sample.class)
